@@ -1,7 +1,7 @@
 public class Veterinario extends Funcionario{
     private String especialidade, cfmv;
 
-    public Veterinario(String nome, String cpf, String email, String telefone, String turno, String especialidade, String cfmv){
+    public Veterinario(String nome, String cpf, String email, int telefone, String turno, String especialidade, String cfmv){
         super(nome, cpf, email, telefone, turno);
         this.especialidade = especialidade;
         this.cfmv = cfmv;

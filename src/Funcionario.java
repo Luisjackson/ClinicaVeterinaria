@@ -1,7 +1,8 @@
 public class Funcionario{
-    private String nome, cpf, email, telefone, turno;
+    private String nome, cpf, email, turno;
+    private int telefone;
 
-    public Funcionario(String nome, String cpf, String email, String telefone, String turno){
+    public Funcionario(String nome, String cpf, String email, int telefone, String turno){
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;

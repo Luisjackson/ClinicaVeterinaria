@@ -37,7 +37,7 @@ public class Vacina{
         return this.dataAplicacao;
     }
     
-    public String getPreco(){
+    public float getPreco(){
         return this.preco;
     }
 }
