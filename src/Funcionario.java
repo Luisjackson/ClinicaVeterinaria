@@ -1,25 +1,9 @@
-public class Funcionario{
-    private String nome, cpf, email, turno;
-    private int telefone;
+public class Funcionario extends Pessoa{
+    private String turno;
 
     public Funcionario(String nome, String cpf, String email, int telefone, String turno){
-        this.nome = nome;
-        this.cpf = cpf;
-        this.email = email;
-        this.telefone = telefone;
+        super(nome, cpf, email, telefone);
         this.turno = turno;
-    }
-
-    public void setNome(String nome){
-        this.nome = nome;
-    }
-
-    public void setCpf(String cpf){
-        this.cpf = cpf;
-    }
-
-    public void setEmail(String email){
-        this.email = email;
     }
 
     public void setTurno(String turno){
