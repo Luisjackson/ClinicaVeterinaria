@@ -10,27 +10,7 @@ public class Funcionario extends Pessoa{
         this.turno = turno;
     }
 
-    public void setTelefone(int telefone){
-        this.telefone = telefone;
-    }
-
-    public String getNome(){
-        return this.nome;
-    }
-
-    public String getCpf(){
-        return this.cpf;
-    }
-
-    public String getEmail(){
-        return this.email;
-    }
-
     public String getTurno(){
         return this.turno;
-    }
-
-    public int getTelefone(){
-        return this.telefone;
     }
 }
