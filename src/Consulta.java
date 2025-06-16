@@ -17,8 +17,6 @@ public class Consulta
        this.diagnostico = diagnostico;
        this.medicamentos = medicamentos;
     }
-    
-    
     public Animal getAnimal() {
     return animal;
 }

@@ -7,4 +7,8 @@ public class Tutor extends Pessoa{
         super(nome, cpf, email, endereco, telefone);
         this.animais = new ArrayList<Animal>();
     }
+    
+
+
+
 }

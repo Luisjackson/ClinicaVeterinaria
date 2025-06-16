@@ -16,7 +16,7 @@ private ArrayList<Consulta> consultas;
     this.consultas = new ArrayList<Consulta>();
     }
 
-// set    
+// set
     
 public void setNome(String nome){
     this.nome = nome;
