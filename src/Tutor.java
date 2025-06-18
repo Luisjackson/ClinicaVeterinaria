@@ -9,15 +9,7 @@ public class Tutor extends Pessoa{
         this.endereco = endereco;
         this.animais = new ArrayList<Animal>();
     }
-<<<<<<< HEAD
-    
 
-
-
-}
-=======
-
-    
     public ArrayList<Animal> getAnimais() {
         return animais;
     }
@@ -37,4 +29,3 @@ public class Tutor extends Pessoa{
     
     
 }
->>>>>>> 2f4f87fd3a87940a5e636a0ebaaeda098f4f0507
