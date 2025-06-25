@@ -36,8 +36,17 @@ public class Vacina{
     public String getDataAplicacao(){
         return this.dataAplicacao;
     }
-    
+
     public float getPreco(){
         return this.preco;
     }
+
+    @Override
+    public String toString() {
+        return ("Nome:" + getNomeVacina() +
+                "\ndata:" + getDataAplicacao() +
+                "\nvalidade:" + getValidade());
+    }
+
+
 }
