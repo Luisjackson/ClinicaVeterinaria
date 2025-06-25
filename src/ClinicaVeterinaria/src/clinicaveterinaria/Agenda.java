@@ -1,24 +1,35 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Agenda{
-    private String data, horario;
+    private LocalDate data, horario;
 
-    public Agenda(String data, String horario){
+    public Agenda(LocalDate data, LocalDate horario) {
         this.data = data;
         this.horario = horario;
     }
 
-    public void setData(String data){
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
-    public void setHorario(String horario){
+    public LocalDate getHorario() {
+        return horario;
+    }
+
+    public void setHorario(LocalDate horario) {
         this.horario = horario;
     }
 
-    public String getData(){
-        return this.data;
-    }
-
-    public String getHorario(){
-        return this.horario;
+    @Override
+    public String toString() {
+        return "Agenda{" +
+                "data=" + data +
+                ", horario=" + horario +
+                '}';
     }
 }
