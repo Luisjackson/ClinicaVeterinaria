@@ -15,6 +15,20 @@ public class Animal{
         this.consultasAnimal = new ArrayList<Consulta>();
     }
 
+    public void adicionarVacina(Vacina vacina){
+        cartaoVacina.add(vacina);
+    }
+
+    public void adicionarConsulta(Consulta consulta){
+        consultasAnimal.add(consulta);
+    }
+
+    public void imprimirCartao(){
+        for(Vacina vac:cartaoVacina){
+            System.out.println(vac);
+        }
+    }
+
     public void setNome(String nome){
         this.nome = nome;
     }
@@ -46,5 +60,14 @@ public class Animal{
     public Tutor getTutor(){
         return this.tutor;
     }
+
+    @Override
+    public String toString() {
+        return ("nome:" + getNome() +
+                "\nraca:" + getRaca() +
+                "\ndataNascimento=:" + getDataNascimento() +
+                "\nTutor:" + getTutor());
+    }
+
 
 }
