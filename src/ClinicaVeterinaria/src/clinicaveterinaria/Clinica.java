@@ -1,63 +1,70 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Clinica
-{
-private String nome;
-private ArrayList<Animal> pacientes;
-private ArrayList<Funcionario> funcionarios;
-private ArrayList<Agenda> agendas;
-private ArrayList<Consulta> consultas;
-    
+public class Clinica {
+    private String nome;
+    private ArrayList<Animal> pacientes;
+    private ArrayList<Funcionario> funcionarios;
+    private ArrayList<Agenda> agendas;
+    private ArrayList<Consulta> consultas;
+
     public Clinica (String nome){
-    this.nome = nome;
-    this.pacientes = new ArrayList<Animal>();
-    this.funcionarios = new ArrayList<Funcionario>();
-    this.agendas = new ArrayList<Agenda>();
-    this.consultas = new ArrayList<Consulta>();
+        this.nome = nome;
+        this.pacientes = new ArrayList<Animal>();
+        this.funcionarios = new ArrayList<Funcionario>();
+        this.agendas = new ArrayList<Agenda>();
+        this.consultas = new ArrayList<Consulta>();
     }
 
-// set    
-    
-public void setNome(String nome){
-    this.nome = nome;
-}
-    
-public void addPaciente(Animal animal){
-    this.pacientes.add(animal);
-}
-    
-public void addFuncionario(Funcionario funcionario){
-    this.funcionarios.add(funcionario);
-}
+    public void marcarConsulta(Animal animal, Especialidade especialidade, LocalDate data, LocalDate horario){
 
-public void addAgenda(Agenda agenda){
-    this.agendas.add(agenda);
-}
+    }
 
-public void addConsulta(Consulta consulta){
-    this.consultas.add(consulta);
-}
+    public void setNome(String nome){
+        this.nome = nome;
+    }
 
-// gets
+    public void addPaciente(Animal animal){
+        this.pacientes.add(animal);
+    }
 
-public String getNome(){
-    return this.nome;
-}
+    public void addFuncionario(Funcionario funcionario){
+        this.funcionarios.add(funcionario);
+    }
 
-public ArrayList<Animal> getPacientes() {
-    return this.pacientes;
-}
+    public void addAgenda(Agenda agenda){
+        this.agendas.add(agenda);
+    }
 
-public ArrayList<Funcionario> getFuncionarios(){
-    return this.funcionarios;
-}
+    public void addConsulta(Consulta consulta){
+        this.consultas.add(consulta);
+    }
 
-public ArrayList<Agenda> getAgendas(){
-    return this.agendas;
-}
+    public String getNome(){
+        return this.nome;
+    }
 
-public ArrayList<Consulta> getConsultas(){
-    return this.consultas;
-}
+    public ArrayList<Animal> getPacientes() {
+        return this.pacientes;
+    }
+
+    public ArrayList<Funcionario> getFuncionarios(){
+        return this.funcionarios;
+    }
+
+    public ArrayList<Agenda> getAgendas(){
+        return this.agendas;
+    }
+
+    public ArrayList<Consulta> getConsultas(){
+        return this.consultas;
+    }
+
+    @Override
+    public String toString() {
+        return "Clinica{" +
+                ", Total de Funcionarios=" + funcionarios.size() +
+                ", Total de Consultas=" + consultas.size();
+    }
 
 }
