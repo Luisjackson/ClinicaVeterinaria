@@ -1,18 +1,19 @@
+
 import java.util.ArrayList;
 
 public class Animal{
     private String nome, raca, dataNascimento;
     private Tutor tutor;
-    private ArrayList<Vacina> cartaoVacina;
-    private ArrayList<Consulta> consultasAnimal;
+    private ArrayList<Vacinacao> vacinas;
+    private ArrayList<Consulta> consultas;
 
     public Animal(String nome, String raca, String dataNascimento, Tutor tutor){
         this.nome = nome;
         this.raca = raca;
         this.dataNascimento = dataNascimento;
         this.tutor = tutor;
-        this.cartaoVacina = new ArrayList<Vacina>();
-        this.consultasAnimal = new ArrayList<Consulta>();
+        this.vacinas = new ArrayList<Vacinacao>();
+        this.consultas = new ArrayList<Consulta>();
     }
 
     public void setNome(String nome){
@@ -47,5 +48,32 @@ public class Animal{
         return this.tutor;
     }
 
-}
+    public ArrayList<Vacinacao> getVacinas() {
+        return vacinas;
+    }
 
+    public void setVacinas(Vacinacao vacina) {
+        this.vacinas.add(vacina);
+    }
+
+    public ArrayList<Consulta> getConsultas() {
+        return consultas;
+    }
+
+    public void setConsultas(Consulta consulta) {
+        this.consultas.add(consulta);
+    }
+    
+    
+    
+    public void emitirCartaoVacina(){
+        
+        System.out.println("Cartão de Vacina");
+        for(Vacinacao va : this.getVacinas()){
+            va.emissaoInfo();
+            
+        }
+        
+    }
+    
+}
