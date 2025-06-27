@@ -1,73 +1,49 @@
-import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-public class Animal{
-    private String nome, raca, dataNascimento;
-    private Tutor tutor;
-    private ArrayList<Vacina> cartaoVacina;
-    private ArrayList<Consulta> consultasAnimal;
+public class Agendamento {
+    private Animal animal;
+    private Especialidade especialidade;
+    private Agenda agenda; // em vez de LocalDate e LocalTime separados
 
-    public Animal(String nome, String raca, String dataNascimento, Tutor tutor){
-        this.nome = nome;
-        this.raca = raca;
-        this.dataNascimento = dataNascimento;
-        this.tutor = tutor;
-        this.cartaoVacina = new ArrayList<Vacina>();
-        this.consultasAnimal = new ArrayList<Consulta>();
+    public Agendamento(Animal animal, Especialidade especialidade, Agenda agenda) {
+        this.animal = animal;
+        this.especialidade = especialidade;
+        this.agenda = agenda;
     }
 
-    public void adicionarVacina(Vacina vacina){
-        cartaoVacina.add(vacina);
+    // Getters
+    public Animal getAnimal() {
+        return animal;
     }
 
-    public void adicionarConsulta(Consulta consulta){
-        consultasAnimal.add(consulta);
+    public Especialidade getEspecialidade() {
+        return especialidade;
     }
 
-    public void imprimirCartao(){
-        for(Vacina vac:cartaoVacina){
-            System.out.println(vac);
-        }
+    // Setters
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
     }
 
-    public void setNome(String nome){
-        this.nome = nome;
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
     }
 
-    public void setRaca(String raca){
-        this.raca = raca;
+    public Agenda getAgenda() {
+        return agenda;
     }
 
-    public void setDataNascimento(String dataNascimento){
-        this.dataNascimento = dataNascimento;
-    }
-
-    public void setTutor(Tutor tutor){
-        this.tutor = tutor;
-    }
-
-    public String getNome(){
-        return this.nome;
-    }
-
-    public String getRaca(){
-        return this.raca;
-    }
-
-    public String getDataNascimento(){
-        return this.dataNascimento;
-    }
-
-    public Tutor getTutor(){
-        return this.tutor;
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
     }
 
     @Override
     public String toString() {
-        return ("nome:" + getNome() +
-                "\nraca:" + getRaca() +
-                "\ndataNascimento=:" + getDataNascimento() +
-                "\nTutor:" + getTutor());
+        return "Agendamento{" +
+                "animal=" + animal +
+                ", especialidade=" + especialidade +
+                ", agenda=" + agenda +
+                '}';
     }
-
-
 }
