@@ -1,8 +1,8 @@
-public class Vacina{
-    private String nomeVacina, validade, dataAplicacao;
+public class Vacinacao{
+    private String nomeVacina,validade, dataAplicacao;
     private float preco;
 
-    public Vacina(String nomeVacina, String validade, String dataAplicacao, float preco){
+    public Vacinacao(String nomeVacina, String validade, String dataAplicacao, float preco){
         this.nomeVacina = nomeVacina;
         this.validade = validade;
         this.dataAplicacao = dataAplicacao;
@@ -39,5 +39,13 @@ public class Vacina{
     
     public float getPreco(){
         return this.preco;
+    }
+    
+    public void emissaoInfo(){
+        
+        System.out.println("Nome Vacina: "+ getNomeVacina() );
+        System.out.println("Data Validade: "+ getValidade() );
+        System.out.println("Data de Aplicação"+ getDataAplicacao() );
+        System.out.println("Valor pago: "+getPreco());
     }
 }
