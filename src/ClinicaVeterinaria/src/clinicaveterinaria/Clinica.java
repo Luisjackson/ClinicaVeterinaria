@@ -159,6 +159,7 @@ public class Clinica {
         System.out.println("Vacina " + vacina.getNomeVacina() + " aplicada no animal: " + animal.getNome());
     }
 
+<<<<<<< HEAD
     public void emitirCobranca(Animal animal) {
         float totalVacinas = 0;
         float totalConsultas = 0;
@@ -231,6 +232,8 @@ public class Clinica {
 
 
 
+=======
+>>>>>>> f361bdc36e840ed8e7d6793d352dba0349ae2874
     public void addPaciente(Animal animal){
         this.pacientes.add(animal);
     }
