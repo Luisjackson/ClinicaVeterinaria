@@ -5,6 +5,7 @@ public class Agenda{
 
     public Agenda(String data){
         this.data = data;
+	this.horario = -1;
     }
 
     public void setData(String data){
