@@ -95,7 +95,7 @@ public class Clinica {
             return;
         }
 
-        // Usa a data atual como referência
+        // Usa a data atual 
         LocalDate data = LocalDate.now();
         Consulta consulta = new Consulta(medicamentos, diagnostico, data, motivo, animal, veterinario);
 
