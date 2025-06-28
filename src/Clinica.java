@@ -60,4 +60,10 @@ public ArrayList<Consulta> getConsultas(){
     return this.consultas;
 }
 
+// remove
+
+public void removeAgenda(Agenda agenda){
+    this.agendas.remove(agenda);
+}
+
 }
