@@ -1,7 +1,4 @@
-
-
-public class Consulta
-{
+public class Consulta  implements Util{
    private Animal animal;
    private Veterinario  veterinario;
    private String motivo;
@@ -17,7 +14,7 @@ public class Consulta
        this.diagnostico = diagnostico;
        this.medicamentos = medicamentos;
     }
-    public Animal getAnimal() {
+public Animal getAnimal() {
     return animal;
 }
 
@@ -65,5 +62,20 @@ public void setMedicamentos(String medicamentos) {
     this.medicamentos = medicamentos;
 }
 
+   @Override
+   public float cobrar(){
+    return this.getVeterinario().getEspecialidade().getPreco(); 
+      
+}
+
+public void getDados() {
+    System.out.println("Animal: " + animal.getNome());
+    System.out.println("Veterinário: " + veterinario.getNome());
+    System.out.println("Especialidade Veterinário: " + veterinario.getEspecialidade().getNome());
+    System.out.println("Motivo: " + motivo);
+    System.out.println("Data: " + data);
+    System.out.println("Diagnóstico: " + diagnostico);
+    System.out.println("Medicamentos: " + medicamentos);
+}
     
 }
