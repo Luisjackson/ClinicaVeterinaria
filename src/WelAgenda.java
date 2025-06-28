@@ -1,11 +1,23 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package com.mycompany.clinicaveterinaria;
+
+//import java.util.ArrayList;
 
 public class Agenda{
     private int horario;
     private String data;
+    private Especialidade especialidade;
+    private Animal animal;
 
-    public Agenda(String data){
+    public Agenda(String data, Especialidade especialidade, Animal animal){
         this.data = data;
-	this.horario = -1;
+        this.especialidade = especialidade;
+        this.animal = animal;
+        
+        this.horario = -1;
     }
 
     public void setData(String data){
@@ -60,5 +72,33 @@ int total = somarMinutos(horario, 20);
        
        return resultado;
    }
+
+    /**
+     * @return the especialidade
+     */
+    public Especialidade getEspecialidade() {
+        return especialidade;
+    }
+
+    /**
+     * @param especialidade the especialidade to set
+     */
+    public void setEspecialidade(Especialidade especialidade) {
+        this.especialidade = especialidade;
+    }
+
+    /**
+     * @return the animal
+     */
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    /**
+     * @param animal the animal to set
+     */
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
 
 } 
