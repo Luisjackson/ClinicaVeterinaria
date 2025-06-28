@@ -153,6 +153,12 @@ public class Clinica {
         return false;
     }
 
+    // VERIFICAR SE FAZ MAIS SENTIDO APLICAR VACINA EM ANIMAL OU CLINICA
+    public void aplicarVacina(Animal animal, Vacina vacina) {
+        animal.adicionarVacina(vacina);
+        System.out.println("Vacina " + vacina.getNomeVacina() + " aplicada no animal: " + animal.getNome());
+    }
+
     public void addPaciente(Animal animal){
         this.pacientes.add(animal);
     }
