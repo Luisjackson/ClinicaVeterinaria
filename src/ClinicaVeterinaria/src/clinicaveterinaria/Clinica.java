@@ -38,8 +38,9 @@ public class Clinica {
                 return false;
             }
         }
+        
         //Caso não retorne falso quer dizer que o horario é permitido e não tem agendamento naquela data
-
+        
         //Adiciona o novo agendamento a lista de agendamentos
         agendamentos.add(new Agendamento(animal, esp, agenda));
         System.out.println("Consulta marcada para " + agenda);
