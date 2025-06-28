@@ -57,4 +57,10 @@ public class Clinica{
         return this.consultas;
     }
 
+// remove
+
+public void removeAgenda(Agenda agenda){
+    this.agendas.remove(agenda);
+}
+
 }
