@@ -1,12 +1,14 @@
+import java.time.LocalDate;
+
 public class Consulta {
     private Animal animal;
     private Veterinario  veterinario;
     private String motivo;
-    private String data;
+    private LocalDate data;
     private String diagnostico;
     private String medicamentos;
 
-    public Consulta(String medicamentos, String diagnostico,String data, String motivo, Animal animal, Veterinario veterinario){
+    public Consulta(String medicamentos, String diagnostico, LocalDate data, String motivo, Animal animal, Veterinario veterinario){
         this.animal = animal;
         this.veterinario = veterinario;
         this.motivo = motivo;
@@ -39,11 +41,11 @@ public class Consulta {
         this.motivo = motivo;
     }
 
-    public String getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(String data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
@@ -69,7 +71,7 @@ public class Consulta {
                 "animal=" + animal +
                 ", veterinario=" + veterinario +
                 ", motivo='" + motivo + '\'' +
-                ", data='" + data + '\'' +
+                ", data=" + data +
                 ", diagnostico='" + diagnostico + '\'' +
                 ", medicamentos='" + medicamentos + '\'' +
                 '}';

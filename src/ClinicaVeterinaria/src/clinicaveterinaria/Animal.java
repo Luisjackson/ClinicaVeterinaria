@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Animal{
@@ -15,6 +16,7 @@ public class Animal{
         this.consultasAnimal = new ArrayList<Consulta>();
     }
 
+
     public void adicionarVacina(Vacina vacina){
         cartaoVacina.add(vacina);
     }
@@ -28,6 +30,42 @@ public class Animal{
             System.out.println(vac);
         }
     }
+
+    public void vacinasQueVencem() {
+        LocalDate agora = LocalDate.now();
+        int mesAtual = agora.getMonthValue();
+        int anoAtual = agora.getYear();
+
+        boolean encontrou = false;
+
+        for (Vacina vac : cartaoVacina) {
+            if (vac.getDataValidade().getMonthValue() == mesAtual &&
+                    vac.getDataValidade().getYear() == anoAtual) {
+                System.out.println("Vacina: " + vac.getNomeVacina() +
+                        " | Data de Vencimento: " + vac.getDataValidade());
+                encontrou = true;
+            }
+        }
+        if (!encontrou) {
+            System.out.println("Nenhuma vacina vence neste mês.");
+        }
+    }
+
+    //Caso eu queria dizer o mes
+    public void vacinasQueVencem(int mes, int ano) {
+        boolean encontrou = false;
+        for (Vacina vac : cartaoVacina) {
+            if (vac.getDataValidade().getMonthValue() == mes && vac.getDataValidade().getYear() == ano) {
+                System.out.println("Vacina: " + vac.getNomeVacina() + " Data de Vencimento: " + vac.getDataValidade());
+                encontrou = true;
+            }
+        }
+        if (!encontrou) {
+            System.out.println("Nenhuma vacina vence em " + mes + "/" + ano + ".");
+        }
+    }
+
+
 
     public void setNome(String nome){
         this.nome = nome;
@@ -79,11 +117,13 @@ public class Animal{
 
     @Override
     public String toString() {
-        return ("nome:" + getNome() +
-                "\nraca:" + getRaca() +
-                "\ndataNascimento=:" + getDataNascimento() +
-                "\nTutor:" + getTutor());
+        return "Animal{" +
+                "nome='" + nome + '\'' +
+                ", raca='" + raca + '\'' +
+                ", dataNascimento='" + dataNascimento + '\'' +
+                ", tutor=" + tutor +
+                ", cartaoVacina=" + cartaoVacina +
+                ", consultasAnimal=" + consultasAnimal +
+                '}';
     }
-
-
 }

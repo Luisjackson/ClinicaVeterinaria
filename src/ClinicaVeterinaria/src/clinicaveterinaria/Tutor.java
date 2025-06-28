@@ -25,5 +25,10 @@ public class Tutor extends Pessoa{
         this.animais.add(animal);
     }
 
-
+    @Override
+    public String toString() {
+        return "Tutor{" +
+                "animais=" + animais +
+                '}';
+    }
 }

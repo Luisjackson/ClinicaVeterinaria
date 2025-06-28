@@ -14,8 +14,16 @@ public class Agenda {
         return data;
     }
 
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
     public LocalTime getHorario() {
         return horario;
+    }
+
+    public void setHorario(LocalTime horario) {
+        this.horario = horario;
     }
 
     public boolean isHorarioPermitido() {
