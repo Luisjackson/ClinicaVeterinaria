@@ -1,4 +1,7 @@
 
+package com.mycompany.clinicaveterinaria;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Animal{
@@ -6,7 +9,7 @@ public class Animal{
     private Tutor tutor;
     private ArrayList<Vacinacao> vacinas;
     private ArrayList<Consulta> consultas;
-
+    
     public Animal(String nome, String raca, String dataNascimento, Tutor tutor){
         this.nome = nome;
         this.raca = raca;
@@ -64,13 +67,65 @@ public class Animal{
         this.consultas.add(consulta);
     }
     
+    public void consultarVacina(Vacinacao val){ 
+    val.emissaoInfo(); 
+}
     
+ 
+    public void emitirDados(){
+            System.out.println("Nome: "+ this.nome);
+            System.out.println("Raça: "+ this.raca);
+            System.out.println("Data de Nascimento: "+ this.dataNascimento);
+            System.out.println("Tutor; "+ this.tutor);
+        }
+ 
     
     public void emitirCartaoVacina(){
         
         System.out.println("Cartão de Vacina");
-        for(Vacinacao va : this.getVacinas()){
+        for(Vacinacao va : vacinas){
             va.emissaoInfo();
+            
+        }
+        
+    }
+// sem data informada ele vai pegar a data do dia atual
+    public void ConsultaVencimento(){
+           LocalDate atual = LocalDate.now();
+       
+        LocalDate estimado;
+        
+         System.out.println("Vacinas que estão para vencer a validade este mês: ");
+         System.out.println(" ");
+        for(Vacinacao val : vacinas){
+            estimado = val.prazoVacina();
+            if((estimado.getYear() == atual.getYear()) && (estimado.getMonth() == atual.getMonth() )) { 
+                
+                System.out.println("Nome: "+ val.getNomeVacina());
+                System.out.println("Data de Vencimento: "+ estimado);
+                
+            }
+            
+        }
+        
+    }
+    
+// com data ele informa baseado naquela determinada data
+    public void consultarVencimento(int data){
+        LocalDate atual = Util.conversor(data);
+       
+        LocalDate estimado;
+        
+         System.out.println("Vacinas que estão para vencer a validade este mês: ");
+         System.out.println(" ");
+        for(Vacinacao val : vacinas){
+            estimado = val.prazoVacina();
+            if((estimado.getYear() == atual.getYear()) && (estimado.getMonth() == atual.getMonth() )) { 
+                
+                System.out.println("Nome: "+ val.getNomeVacina());
+                System.out.println("Data de Vencimento: "+ estimado);
+                
+            }
             
         }
         
