@@ -1,8 +1,8 @@
 public class Especialidade {
     private String nome;
-    private double preco;
+    private float preco;
 
-    public Especialidade(String nome, double preco) {
+    public Especialidade(String nome, float preco) {
         this.nome = nome;
         this.preco = preco;
     }
@@ -15,11 +15,11 @@ public class Especialidade {
         this.nome = nome;
     }
 
-    public double getPreco() {
+    public float getPreco() {
         return preco;
     }
 
-    public void setPreco(double preco) {
+    public void setPreco(float preco) {
         this.preco = preco;
     }
 

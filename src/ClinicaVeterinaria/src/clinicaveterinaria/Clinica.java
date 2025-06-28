@@ -153,6 +153,84 @@ public class Clinica {
         return false;
     }
 
+    // VERIFICAR SE FAZ MAIS SENTIDO APLICAR VACINA EM ANIMAL OU CLINICA
+    public void aplicarVacina(Animal animal, Vacina vacina) {
+        animal.adicionarVacina(vacina);
+        System.out.println("Vacina " + vacina.getNomeVacina() + " aplicada no animal: " + animal.getNome());
+    }
+
+    public void emitirCobranca(Animal animal) {
+        float totalVacinas = 0;
+        float totalConsultas = 0;
+
+        // Soma das vacinas
+        for (Vacina vacina : animal.getCartaoVacina()) {
+            totalVacinas += vacina.getPreco();
+        }
+
+        // Soma das especialidades das consultas realizadas
+        for (Consulta consulta : animal.getConsultasAnimal()) {
+            totalConsultas += consulta.getVeterinario().getEspecialiade().getPreco();
+        }
+
+        float totalGeral = totalVacinas + totalConsultas;
+
+        System.out.println("------ Cobrança para " + animal.getNome() + " ------");
+        System.out.println("Total em vacinas: R$ " + totalVacinas);
+        System.out.println("Total em consultas: R$ " + totalConsultas);
+        System.out.println("Total geral: R$ " + totalGeral);
+        System.out.println("----------------------------------------");
+    }
+
+    public void vacinasQueVencemEsteMes(Animal animal) {
+        LocalDate hoje = LocalDate.now();
+        int mesAtual = hoje.getMonthValue();
+        int anoAtual = hoje.getYear();
+
+        System.out.println("Vacinas de " + animal.getNome() + " que vencem em " + hoje.getMonth() + "/" + anoAtual + ":");
+
+        boolean encontrou = false;
+
+        for (Vacina vacina : animal.getCartaoVacina()) {
+            LocalDate validade = vacina.getDataValidade();
+            if (validade.getMonthValue() == mesAtual && validade.getYear() == anoAtual) {
+                System.out.println("- " + vacina.getNomeVacina() + " (vence em: " + validade + ")");
+                encontrou = true;
+            }
+        }
+
+        if (!encontrou) {
+            System.out.println("Nenhuma vacina vence neste mês.");
+        }
+    }
+
+    public void emitirProntuario(Animal animal) {
+        consultas = animal.getConsultasAnimal();
+
+        if (consultas.isEmpty()) {
+            System.out.println("Nenhuma consulta registrada para " + animal.getNome());
+            return;
+        }
+
+        System.out.println("Prontuário do animal " + animal.getNome());
+
+        // Mostra da mais recente para a mais antiga
+
+        for (int i = consultas.size() - 1; i >= 0; i--) {
+            Consulta c = consultas.get(i);
+            System.out.println("Data: " + c.getData());
+            System.out.println("Veterinário: " + c.getVeterinario().getNome());
+            System.out.println("Problema: " + c.getMotivo());
+            System.out.println("Diagnóstico: " + c.getDiagnostico());
+            System.out.println("Medicamentos: " + c.getMedicamentos());
+            System.out.println("----------------------------------------");
+        }
+    }
+
+
+
+
+
     public void addPaciente(Animal animal){
         this.pacientes.add(animal);
     }

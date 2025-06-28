@@ -1,52 +1,57 @@
+import java.time.LocalDate;
+
 public class Vacina{
-    private String nomeVacina, validade, dataAplicacao;
+    private String nomeVacina;
+    private LocalDate dataAplicacao;
+    private LocalDate dataValidade;
     private float preco;
 
-    public Vacina(String nomeVacina, String validade, String dataAplicacao, float preco){
+    public Vacina(String nomeVacina, LocalDate dataValidade, LocalDate dataAplicacao, float preco){
         this.nomeVacina = nomeVacina;
-        this.validade = validade;
+        this.dataValidade = dataValidade;
         this.dataAplicacao = dataAplicacao;
         this.preco = preco;
     }
 
-    public void setNomeVacina(String nomeVacina){
+    public String getNomeVacina() {
+        return nomeVacina;
+    }
+
+    public void setNomeVacina(String nomeVacina) {
         this.nomeVacina = nomeVacina;
     }
 
-    public void setValidade(String validade){
-        this.validade = validade;
+    public LocalDate getDataAplicacao() {
+        return dataAplicacao;
     }
 
-    public void setDataAplicacao(String dataAplicacao){
+    public void setDataAplicacao(LocalDate dataAplicacao) {
         this.dataAplicacao = dataAplicacao;
     }
 
-    public void setPreco(float preco){
+    public LocalDate getDataValidade() {
+        return dataValidade;
+    }
+
+    public void setDataValidade(LocalDate dataValidade) {
+        this.dataValidade = dataValidade;
+    }
+
+    public float getPreco() {
+        return preco;
+    }
+
+    public void setPreco(float preco) {
         this.preco = preco;
-    }
-
-    public String getNomeVacina(){
-        return this.nomeVacina;
-    }
-
-    public String getValidade(){
-        return this.validade;
-    }
-
-    public String getDataAplicacao(){
-        return this.dataAplicacao;
-    }
-
-    public float getPreco(){
-        return this.preco;
     }
 
     @Override
     public String toString() {
-        return ("Nome:" + getNomeVacina() +
-                "\ndata:" + getDataAplicacao() +
-                "\nvalidade:" + getValidade());
+        return "Vacina{" +
+                "nomeVacina='" + nomeVacina + '\'' +
+                ", dataAplicacao=" + dataAplicacao +
+                ", dataValidade=" + dataValidade +
+                ", preco=" + preco +
+                '}';
     }
-
-
 }
