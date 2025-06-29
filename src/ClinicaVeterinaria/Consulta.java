@@ -1,3 +1,6 @@
+package ClinicaVeterinaria;
+
+
 import java.time.LocalDate;
 
 public class Consulta {
@@ -76,4 +79,9 @@ public class Consulta {
                 ", medicamentos='" + medicamentos + '\'' +
                 '}';
     }
+    
+       public float cobrar(){
+    return this.getVeterinario().getEspecialiade().getPreco();   
+}
+       
 }

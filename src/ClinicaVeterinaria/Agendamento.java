@@ -1,3 +1,7 @@
+package ClinicaVeterinaria;
+
+
+import ClinicaVeterinaria.Agenda;
 import java.time.LocalDate;
 import java.time.LocalTime;
 

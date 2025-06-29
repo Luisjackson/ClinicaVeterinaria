@@ -1,3 +1,6 @@
+package ClinicaVeterinaria;
+
+
 public class Especialidade {
     private String nome;
     private float preco;

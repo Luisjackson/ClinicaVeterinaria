@@ -1,3 +1,6 @@
+package ClinicaVeterinaria;
+
+
 public class Pessoa{
     private String nome, cpf, email, telefone, endereco;
 

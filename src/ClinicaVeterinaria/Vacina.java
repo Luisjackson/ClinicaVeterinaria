@@ -1,16 +1,21 @@
+package ClinicaVeterinaria;
+
+
 import java.time.LocalDate;
 
 public class Vacina{
+
+    private VacinaOferecida vacina;
     private String nomeVacina;
     private LocalDate dataAplicacao;
     private LocalDate dataValidade;
     private float preco;
 
-    public Vacina(String nomeVacina, LocalDate dataValidade, LocalDate dataAplicacao, float preco){
-        this.nomeVacina = nomeVacina;
-        this.dataValidade = dataValidade;
+    public Vacina(LocalDate dataAplicacao, VacinaOferecida vacina){
+        this.nomeVacina = vacina.getNome();
+        this.dataValidade = dataAplicacao.plusDays(vacina.getValidade());
         this.dataAplicacao = dataAplicacao;
-        this.preco = preco;
+        this.preco = vacina.getPreco();
     }
 
     public String getNomeVacina() {
@@ -53,5 +58,9 @@ public class Vacina{
                 ", dataValidade=" + dataValidade +
                 ", preco=" + preco +
                 '}';
+    }
+    
+        public float cobrar(){
+        return this.getPreco();
     }
 }

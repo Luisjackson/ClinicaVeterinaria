@@ -26,3 +26,9 @@ replay_pid*
 trabalhoclinica.iml
 out/
 .idea/
+/src/ClinicaVeterinaria/nbproject/private/
+/src/ClinicaVeterinaria/build/
+/ba/ClinicaVeterinaria/build/
+/ba/ClinicaVeterinaria/nbproject/private/
+/nbproject/private/
+/build/

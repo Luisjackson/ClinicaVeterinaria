@@ -1,3 +1,7 @@
+package ClinicaVeterinaria;
+
+import ClinicaVeterinaria.Agenda;
+
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -159,8 +163,23 @@ public class Clinica {
         animal.adicionarVacina(vacina);
         System.out.println("Vacina " + vacina.getNomeVacina() + " aplicada no animal: " + animal.getNome());
     }
-
-    public void emitirCobranca(Animal animal) {
+    
+    
+       public void cobrar(Consulta consulta){
+        float valor = consulta.cobrar(); 
+        
+        System.out.println("O valor a ser pago pela consulta é : "+ valor);
+   }
+    
+       
+   public void cobrar(Vacina vacina){
+       float valor = vacina.cobrar();
+       
+       System.out.println("O valor a ser pago pela vacinação é : "+ valor);
+   }
+    
+        
+    public void emitirTotalGasto(Animal animal) {
         float totalVacinas = 0;
         float totalConsultas = 0;
 
@@ -206,7 +225,7 @@ public class Clinica {
     }
 
     public void emitirProntuario(Animal animal) {
-        consultas = animal.getConsultasAnimal();
+      ArrayList<Consulta> consultas = animal.getConsultasAnimal();
 
         if (consultas.isEmpty()) {
             System.out.println("Nenhuma consulta registrada para " + animal.getNome());
