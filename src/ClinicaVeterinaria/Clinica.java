@@ -23,6 +23,7 @@ public class Clinica {
         this.veterinarios = new ArrayList<>();
         this.agendamentos = new ArrayList<>();
         this.consultas = new ArrayList<>();
+        System.out.println("Clínica criada com nome: " + nome); // para confirmar
     }
 
     public boolean marcarAgendamento(Animal animal, Especialidade esp, Agenda agenda) {
