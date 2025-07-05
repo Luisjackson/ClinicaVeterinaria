@@ -1,6 +1,5 @@
 package ClinicaVeterinaria;
 
-
 import java.util.ArrayList;
 
 public class Tutor extends Pessoa{
@@ -10,6 +9,7 @@ public class Tutor extends Pessoa{
         super(nome, cpf, email, telefone, endereco);
         this.animais = new ArrayList<Animal>();
     }
+    
 
     public void adicionarAnimal(Animal animal){
         animais.add(animal);

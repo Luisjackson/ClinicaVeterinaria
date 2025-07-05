@@ -5,13 +5,13 @@ import java.time.LocalDate;
 
 public class Vacina{
 
-    private VacinaOferecida vacina;
+    private VacinaOferecidas vacina;
     private String nomeVacina;
     private LocalDate dataAplicacao;
     private LocalDate dataValidade;
     private float preco;
 
-    public Vacina(LocalDate dataAplicacao, VacinaOferecida vacina){
+    public Vacina(LocalDate dataAplicacao, VacinaOferecidas vacina){
         this.nomeVacina = vacina.getNome();
         this.dataValidade = dataAplicacao.plusDays(vacina.getValidade());
         this.dataAplicacao = dataAplicacao;

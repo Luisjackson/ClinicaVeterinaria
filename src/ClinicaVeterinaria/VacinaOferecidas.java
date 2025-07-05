@@ -8,13 +8,13 @@ package ClinicaVeterinaria;
  *
  * @author Weliton
  */
-public class VacinaOferecida {
+public class VacinaOferecidas {
     
   private String nome;
   private float preco;
   private int validade;
     
-    public VacinaOferecida(String nome, float preco, int validade) {
+    public VacinaOferecidas(String nome, float preco, int validade) {
      this.nome = nome;
      this.preco = preco;
      this.validade = validade;
