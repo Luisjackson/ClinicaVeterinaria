@@ -1,6 +1,6 @@
 package ClinicaVeterinaria;
 
-
+import java.time.format.DateTimeFormatter;
 import ClinicaVeterinaria.Agenda;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -42,12 +42,12 @@ public class Agendamento {
         this.agenda = agenda;
     }
 
+    //Para que o JComboBox mostre um texto mais amigável
     @Override
     public String toString() {
-        return "Agendamento{" +
-                "animal=" + animal +
-                ", especialidade=" + especialidade +
-                ", agenda=" + agenda +
-                '}';
+        // Formata o texto que será exibido na JComboBox
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy 'às' HH:mm");
+        // O seu método getAgenda().toString() já faz um bom trabalho, vamos usá-lo!
+        return this.animal.getNome() + " - " + this.agenda.toString();
     }
 }

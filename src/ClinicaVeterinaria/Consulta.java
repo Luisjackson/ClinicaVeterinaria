@@ -81,7 +81,7 @@ public class Consulta {
     }
     
        public float cobrar(){
-    return this.getVeterinario().getEspecialiade().getPreco();   
+    return this.getVeterinario().getEspecialidade().getPreco();   
 }
        
 }

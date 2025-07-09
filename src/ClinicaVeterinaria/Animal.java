@@ -118,15 +118,20 @@ public class Animal{
         this.consultasAnimal = consultasAnimal;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Animal{" +
+//                "nome='" + nome + '\'' +
+//                ", raca='" + raca + '\'' +
+//                ", dataNascimento='" + dataNascimento + '\'' +
+//                ", tutor=" + tutor +
+//                ", cartaoVacina=" + cartaoVacina +
+//                ", consultasAnimal=" + consultasAnimal +
+//                '}';
+//    }
+    
     @Override
     public String toString() {
-        return "Animal{" +
-                "nome='" + nome + '\'' +
-                ", raca='" + raca + '\'' +
-                ", dataNascimento='" + dataNascimento + '\'' +
-                ", tutor=" + tutor +
-                ", cartaoVacina=" + cartaoVacina +
-                ", consultasAnimal=" + consultasAnimal +
-                '}';
+        return this.nome; // Apenas o nome será exibido
     }
 }

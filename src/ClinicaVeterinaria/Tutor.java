@@ -30,8 +30,6 @@ public class Tutor extends Pessoa{
 
     @Override
     public String toString() {
-        return "Tutor{" +
-                "animais=" + animais +
-                '}';
+        return this.getNome();  
     }
 }

@@ -13,11 +13,11 @@ public class Vacina{
 
     public Vacina(LocalDate dataAplicacao, VacinaOferecidas vacina){
         this.nomeVacina = vacina.getNome();
-        this.dataValidade = dataAplicacao.plusDays(vacina.getValidade());
+        this.dataValidade = vacina.getValidade();
         this.dataAplicacao = dataAplicacao;
         this.preco = vacina.getPreco();
     }
-
+    
     public String getNomeVacina() {
         return nomeVacina;
     }

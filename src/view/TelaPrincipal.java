@@ -1,9 +1,22 @@
 package view;
 
+import ClinicaVeterinaria.Sistema;
+import ClinicaVeterinaria.Especialidade;
+import ClinicaVeterinaria.Tutor;
+import ClinicaVeterinaria.Animal;
+import ClinicaVeterinaria.Veterinario;
+import ClinicaVeterinaria.Clinica;
+import javax.swing.JFrame;
+
 public class TelaPrincipal extends javax.swing.JFrame {
+    
+    private Clinica clinica;
+    private Clinica clinicaPrincipal = new Clinica("VetSoft Clínica");
     
     public TelaPrincipal() {
         initComponents();
+//        this.setExtendedState(JFrame.MAXIMIZED_BOTH); // Para abrir em tela cheia
+
     }
 
     @SuppressWarnings("unchecked")
@@ -32,6 +45,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jButton3.setText("Animal");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -133,42 +147,38 @@ public class TelaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(229, 229, 229)
+                .addGap(176, 176, 176)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(272, 272, 272)
-                                .addComponent(jButton9)))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(88, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(198, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addGap(198, 198, 198))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(432, 432, 432))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel10)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton7))
-                    .addComponent(jButton8, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addGap(89, 89, 89)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton9)
-                .addGap(448, 448, 448))
+                .addGap(56, 56, 56)
+                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(200, Short.MAX_VALUE))
         );
 
         pack();
@@ -179,32 +189,47 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_exitMenuItemActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        TelaAnimal telaAnimal = new TelaAnimal();
-        telaAnimal.setVisible(true);
+       CadastroAnimal cadastroAnimal = new CadastroAnimal(this.clinicaPrincipal);
+        cadastroAnimal.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
- 
+        System.exit(0); 
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 //        TelaProntuario telaProntuario = new TelaProntuario();
 //        telaProntuario.setVisible(true);
         
-        TelaClinica telaClinica = new TelaClinica();
+        TelaClinica telaClinica = new TelaClinica(this.clinicaPrincipal);
         telaClinica.setVisible(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        TelaTutor telaTutor = new TelaTutor();
-        telaTutor.setVisible(true);
+        CadastroTutor cadastroTutor = new CadastroTutor(this.clinicaPrincipal);
+        cadastroTutor.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     public static void main(String args[]) {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                //TESTANDO, DEPOIS VOU DEIXAR SOMENTE A CLINICA. PRA NAO PRECISAR CRIAR.
+//                Clinica novaClinica = new Clinica("clinica");
+                Sistema.listaEspecialidades.add(new Especialidade("Cardiologista", 180.00f));
+//                Sistema.listaEspecialidades.add(new Especialidade("Ortopedista", 160.00f));
+                Especialidade Ortopedista1 = new Especialidade("Ortopedista", 160.00f);
+                Sistema.listaEspecialidades.add(new Especialidade("Dermatologista", 150.00f));
+                Sistema.listaEspecialidades.add(Ortopedista1);
+                
+                Tutor tutor1 = new Tutor("Luis", "10080", "luis@gmail.com", "17461665-45", "Rua UNEb");
+                Sistema.listaTutores.add(tutor1);
+                
+                Sistema.listaAnimais.add(new Animal("Cachorro", "Poodle", "10/11/2018", tutor1));
+                Sistema.listaVeterinarios.add(new Veterinario("Daniel", "10020", "Daniel@gmail.com", "Rua Lapa", "88365-63356", "Matutino", Ortopedista1, "1050"));
+
                 new TelaPrincipal().setVisible(true);
+                
             }
         });
     }

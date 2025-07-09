@@ -5,25 +5,27 @@ import ClinicaVeterinaria.Agenda;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Clinica {
     private String nome;
-    private ArrayList<Animal> pacientes;
-    private ArrayList<Funcionario> funcionarios;
-    private ArrayList<Agendamento> agendamentos;
-    private ArrayList<Consulta> consultas;
+    
+    private ArrayList<Tutor> listaTutores = new ArrayList<>();
+    private ArrayList<Animal> listaAnimais = new ArrayList <>();
+    private ArrayList<Animal> listaPacientes = new ArrayList <>();
+    private ArrayList<Veterinario> listaVeterinarios = new ArrayList<>();
+    private ArrayList<Especialidade> listaEspecialidades = new ArrayList<>();
+    private ArrayList<VacinaOferecidas> listaVacinas = new ArrayList<>();
+    private ArrayList<Agendamento> agendamentos = new ArrayList<>();
+    private ArrayList<Consulta> consultas = new ArrayList<>();
+    private ArrayList<Funcionario> listaFuncionarios = new ArrayList<>();
+    
 
-    // Acrescentei Veterinario aqui pq tava muito complexo utilizar funcionario
-    private ArrayList<Veterinario> veterinarios;
 
     public Clinica(String nome) {
         this.nome = nome;
-        this.pacientes = new ArrayList<>();
-        this.funcionarios = new ArrayList<>();
-        this.veterinarios = new ArrayList<>();
-        this.agendamentos = new ArrayList<>();
-        this.consultas = new ArrayList<>();
     }
+
 
     public boolean marcarAgendamento(Animal animal, Especialidade esp, Agenda agenda) {
 
@@ -51,17 +53,45 @@ public class Clinica {
         return true;
     }
 
-    public void realizarConsulta(Agendamento agendamento, String motivo, String diagnostico, String medicamentos) {
-        Animal animal = agendamento.getAnimal();
-        Especialidade especialidade = agendamento.getEspecialidade();
+    // 
+        public Consulta realizarConsulta(Agendamento agendamento, String motivo, String diagnostico, String medicamentos) {
+           Animal animal = agendamento.getAnimal();
+           Especialidade especialidade = agendamento.getEspecialidade();
+           Veterinario veterinario = null;
 
-        //Para guardar o veterinario disponivel
+           // CORREÇÃO: O loop agora procura na lista correta (this.listaVeterinarios)
+           for (Veterinario v : this.listaVeterinarios) {
+               // Usa a comparação de objetos, que é mais segura
+               if (v.getEspecialidade().equals(especialidade)) {
+                   veterinario = v;
+                   break;
+               }
+           }
+
+           if (veterinario == null) {
+               System.out.println("Nenhum veterinário disponível com essa especialidade.");
+               return null;
+           }
+
+           // O resto do seu código já está correto
+           LocalDate data = agendamento.getAgenda().getData();
+           Consulta consulta = new Consulta(medicamentos, diagnostico, data, motivo, animal, veterinario);
+
+           this.consultas.add(consulta);
+           animal.adicionarConsulta(consulta);
+           this.agendamentos.remove(agendamento);
+
+           System.out.println("Consulta (agendada) realizada com sucesso!");
+           return consulta;
+       }
+
+    public Consulta realizarConsultaDireta(Animal animal, Especialidade especialidade, String motivo, String diagnostico, String medicamentos) {
         Veterinario veterinario = null;
 
-        for (int i = 0; i < veterinarios.size(); i++) {
-            Veterinario v = veterinarios.get(i);
-
-            if (v.getEspecialiade().getNome().equals(especialidade.getNome())) {
+        // CORREÇÃO: O loop agora procura na lista correta (this.listaVeterinarios)
+        for (Veterinario v : this.listaVeterinarios) {
+            // Usa a comparação de objetos, que é mais segura
+            if (v.getEspecialidade().equals(especialidade)) {
                 veterinario = v;
                 break;
             }
@@ -69,44 +99,18 @@ public class Clinica {
 
         if (veterinario == null) {
             System.out.println("Nenhum veterinário disponível com essa especialidade.");
-            return;
+            return null;
         }
 
-        LocalDate data = agendamento.getAgenda().getData();
-        Consulta consulta = new Consulta(medicamentos, diagnostico, data, motivo, animal, veterinario);
-
-        consultas.add(consulta);
-        animal.adicionarConsulta(consulta);
-        agendamentos.remove(agendamento);
-
-        System.out.println("Consulta realizada com sucesso!");
-    }
-
-    public void realizarConsultaDireta(Animal animal, Especialidade especialidade, String motivo, String diagnostico, String medicamentos) {
-        Veterinario veterinario = null;
-
-        for (int i = 0; i < veterinarios.size(); i++) {
-            Veterinario v = veterinarios.get(i);
-
-            if (v.getEspecialiade().getNome().equals(especialidade.getNome())) {
-                veterinario = v;
-                break;
-            }
-        }
-
-        if (veterinario == null) {
-            System.out.println("Nenhum veterinário disponível com essa especialidade.");
-            return;
-        }
-
-        // Usa a data atual 
+        // O resto do seu código já está correto
         LocalDate data = LocalDate.now();
         Consulta consulta = new Consulta(medicamentos, diagnostico, data, motivo, animal, veterinario);
 
-        consultas.add(consulta);
+        this.consultas.add(consulta);
         animal.adicionarConsulta(consulta);
 
-        System.out.println("Consulta feita sem agendamento realizada com sucesso para " + animal.getNome());
+        System.out.println("Consulta (direta) realizada com sucesso!");
+        return consulta;
     }
 
     public void verConsultas(Animal animal) {
@@ -179,84 +183,101 @@ public class Clinica {
    }
     
         
-    public void emitirTotalGasto(Animal animal) {
+    public String emitirTotalGasto(Animal animal) {
         float totalVacinas = 0;
         float totalConsultas = 0;
 
-        // Soma das vacinas
+
+        String relatorio = "";
+
+        relatorio += " Cobrança para: " + animal.getNome() + "\n\n";
+        relatorio += " Detalhamento de Vacinas \n";
+
         for (Vacina vacina : animal.getCartaoVacina()) {
+            relatorio += vacina.getNomeVacina() + ": R$ " + String.format("%.2f", vacina.getPreco()) + "\n";
             totalVacinas += vacina.getPreco();
         }
+        
+        relatorio += "Subtotal de Vacinas: R$ " + String.format("%.2f", totalVacinas) + "\n\n";
 
-        // Soma das especialidades das consultas realizadas
+        relatorio += "--- Detalhamento de Consultas ---\n";
         for (Consulta consulta : animal.getConsultasAnimal()) {
-            totalConsultas += consulta.getVeterinario().getEspecialiade().getPreco();
+            float precoConsulta = consulta.getVeterinario().getEspecialidade().getPreco();
+            relatorio += "Consulta (" + consulta.getVeterinario().getEspecialidade().getNome() + ")" +
+                         ": R$ " + String.format("%.2f", precoConsulta) + "\n";
+            totalConsultas += precoConsulta;
         }
+        relatorio += "Subtotal de Consultas: R$ " + String.format("%.2f", totalConsultas) + "\n\n";
 
         float totalGeral = totalVacinas + totalConsultas;
 
-        System.out.println("------ Cobrança para " + animal.getNome() + " ------");
-        System.out.println("Total em vacinas: R$ " + totalVacinas);
-        System.out.println("Total em consultas: R$ " + totalConsultas);
-        System.out.println("Total geral: R$ " + totalGeral);
-        System.out.println("----------------------------------------");
+        relatorio += "----------------------------------------\n";
+        relatorio += "TOTAL GERAL A PAGAR: R$ " + String.format("%.2f", totalGeral) + "\n";
+        relatorio += "----------------------------------------\n";
+
+        return relatorio;
     }
 
-    public void vacinasQueVencemEsteMes(Animal animal) {
-        LocalDate hoje = LocalDate.now();
-        int mesAtual = hoje.getMonthValue();
-        int anoAtual = hoje.getYear();
+public ArrayList<Vacina> vacinasQueVencemEsteMes(Animal animal) {
+    // Cria uma nova lista para guardar apenas as vacinas que vencem no mês
+    ArrayList<Vacina> vacinasVencendo = new ArrayList<>();
 
-        System.out.println("Vacinas de " + animal.getNome() + " que vencem em " + hoje.getMonth() + "/" + anoAtual + ":");
+    LocalDate hoje = LocalDate.now();
+    int mesAtual = hoje.getMonthValue();
+    int anoAtual = hoje.getYear();
 
-        boolean encontrou = false;
-
-        for (Vacina vacina : animal.getCartaoVacina()) {
-            LocalDate validade = vacina.getDataValidade();
-            if (validade.getMonthValue() == mesAtual && validade.getYear() == anoAtual) {
-                System.out.println("- " + vacina.getNomeVacina() + " (vence em: " + validade + ")");
-                encontrou = true;
-            }
-        }
-
-        if (!encontrou) {
-            System.out.println("Nenhuma vacina vence neste mês.");
+    for (Vacina vacina : animal.getCartaoVacina()) {
+        LocalDate validade = vacina.getDataValidade();
+        // A lógica de verificação está correta
+        if (validade.getMonthValue() == mesAtual && validade.getYear() == anoAtual) {
+            // Adiciona a vacina encontrada na nossa lista de retorno
+            vacinasVencendo.add(vacina);
         }
     }
 
-    public void emitirProntuario(Animal animal) {
-      ArrayList<Consulta> consultas = animal.getConsultasAnimal();
+    // Retorna a lista (pode estar vazia se nenhuma vacina vencer no mês)
+    return vacinasVencendo;
+}
 
-        if (consultas.isEmpty()) {
-            System.out.println("Nenhuma consulta registrada para " + animal.getNome());
-            return;
-        }
 
-        System.out.println("Prontuário do animal " + animal.getNome());
 
-        // Mostra da mais recente para a mais antiga
+public String emitirProntuario(Animal animal) {
+    ArrayList<Consulta> consultas = animal.getConsultasAnimal();
+    String relatorio = "";
 
-        for (int i = consultas.size() - 1; i >= 0; i--) {
-            Consulta c = consultas.get(i);
-            System.out.println("Data: " + c.getData());
-            System.out.println("Veterinário: " + c.getVeterinario().getNome());
-            System.out.println("Problema: " + c.getMotivo());
-            System.out.println("Diagnóstico: " + c.getDiagnostico());
-            System.out.println("Medicamentos: " + c.getMedicamentos());
-            System.out.println("----------------------------------------");
-        }
+    if (consultas.isEmpty()) {
+        relatorio = "Nenhuma consulta registrada para " + animal.getNome();
+        return relatorio;
     }
+
+    relatorio += "------ Prontuário do Animal: " + animal.getNome() + " ------\n\n";
+
+    DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    for (int i = consultas.size() - 1; i >= 0; i--) {
+        Consulta c = consultas.get(i);
+        relatorio += "Data: " + c.getData().format(formatadorData) + "\n";
+        relatorio += "Veterinário: " + c.getVeterinario().getNome() + "\n";
+        relatorio += "Especialidade: " + c.getVeterinario().getEspecialidade().getNome() + "\n";
+        relatorio += "Motivo/Problema: " + c.getMotivo() + "\n";
+        relatorio += "Diagnóstico: " + c.getDiagnostico() + "\n";
+        relatorio += "Medicamentos: " + c.getMedicamentos() + "\n";
+        relatorio += "----------------------------------------\n\n";
+    }
+
+    return relatorio;
+}
 
 
 
 
 
     public void addPaciente(Animal animal){
-        this.pacientes.add(animal);
+        listaPacientes.add(animal);
     }
 
     public void addFuncionario(Funcionario funcionario){
-        this.funcionarios.add(funcionario);
+        listaFuncionarios.add(funcionario);
     }
 
     public void addAgenda(Agendamento agendamento){
@@ -268,7 +289,7 @@ public class Clinica {
     }
 
     public void addVeterinario(Veterinario veterinario) {
-        veterinarios.add(veterinario);
+        listaVeterinarios.add(veterinario);
 
     }
 
@@ -280,20 +301,44 @@ public class Clinica {
         this.nome = nome;
     }
 
-    public ArrayList<Animal> getPacientes() {
-        return pacientes;
+    public ArrayList<Tutor> getListaTutores() {
+        return listaTutores;
     }
 
-    public void setPacientes(ArrayList<Animal> pacientes) {
-        this.pacientes = pacientes;
+    public void setListaTutores(ArrayList<Tutor> listaTutores) {
+        this.listaTutores = listaTutores;
     }
 
-    public ArrayList<Funcionario> getFuncionarios() {
-        return funcionarios;
+    public ArrayList<Animal> getListaAnimais() {
+        return listaAnimais;
     }
 
-    public void setFuncionarios(ArrayList<Funcionario> funcionarios) {
-        this.funcionarios = funcionarios;
+    public void setListaAnimais(ArrayList<Animal> listaAnimais) {
+        this.listaAnimais = listaAnimais;
+    }
+
+    public ArrayList<Veterinario> getListaVeterinarios() {
+        return listaVeterinarios;
+    }
+
+    public void setListaVeterinarios(ArrayList<Veterinario> listaVeterinarios) {
+        this.listaVeterinarios = listaVeterinarios;
+    }
+
+    public ArrayList<Especialidade> getListaEspecialidades() {
+        return listaEspecialidades;
+    }
+
+    public void setListaEspecialidades(ArrayList<Especialidade> listaEspecialidades) {
+        this.listaEspecialidades = listaEspecialidades;
+    }
+
+    public ArrayList<VacinaOferecidas> getListaVacinas() {
+        return listaVacinas;
+    }
+
+    public void setListaVacinas(ArrayList<VacinaOferecidas> listaVacinas) {
+        this.listaVacinas = listaVacinas;
     }
 
     public ArrayList<Agendamento> getAgendamentos() {
@@ -312,23 +357,20 @@ public class Clinica {
         this.consultas = consultas;
     }
 
-    public ArrayList<Veterinario> getVeterinarios() {
-        return veterinarios;
+    public ArrayList<Funcionario> getListaFuncionarios() {
+        return listaFuncionarios;
     }
 
-    public void setVeterinarios(ArrayList<Veterinario> veterinarios) {
-        this.veterinarios = veterinarios;
+    public void setListaFuncionarios(ArrayList<Funcionario> listaFuncionarios) {
+        this.listaFuncionarios = listaFuncionarios;
     }
 
     @Override
     public String toString() {
-        return "Clinica{" +
-                "nome='" + nome + '\'' +
-                ", pacientes=" + pacientes +
-                ", funcionarios=" + funcionarios +
-                ", agendamentos=" + agendamentos +
-                ", consultas=" + consultas +
-                ", veterinarios=" + veterinarios +
-                '}';
+        return "Clinica{" + "nome=" + nome + ", listaTutores=" + listaTutores + ", listaAnimais=" + listaAnimais + ", listaVeterinarios=" + listaVeterinarios + ", listaEspecialidades=" + listaEspecialidades + ", listaVacinas=" + listaVacinas + ", agendamentos=" + agendamentos + ", consultas=" + consultas + ", listaFuncionarios=" + listaFuncionarios + '}';
     }
+
+    
+    
+    
 }

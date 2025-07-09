@@ -1,22 +1,48 @@
 package view;
 
 import ClinicaVeterinaria.Tutor;
-import ClinicaVeterinaria.Sistema;
 import ClinicaVeterinaria.Animal;
+import ClinicaVeterinaria.Clinica;
+import javax.swing.*;
 
 
 public class CadastroTutor extends javax.swing.JFrame {
 
-    public CadastroTutor() {
-        //jComboBox1.removeAllItems();
+    private Clinica clinica;    
+
+    public CadastroTutor(Clinica clinica) {
         initComponents();
-        jComboBox1.removeAllItems(); // limpa qualquer item existente
-
-        for (Animal animal : Sistema.listaAnimais) {
-            jComboBox1.addItem(animal.getNome()); // ou animal.toString() se quiser mais informação
-        }
-
+        this.clinica = clinica;
+        this.setTitle("Gerenciamento de Tutores");
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        popularListaTutores();
+//        limparFormulario();
     }
+
+    private void popularListaTutores() {
+        DefaultListModel<Tutor> modelo = new DefaultListModel<>();
+        modelo.clear();
+        for (Tutor tutor : this.clinica.getListaTutores()) {
+            modelo.addElement(tutor);
+        }
+        jListTutores.setModel(modelo);
+    }
+
+    private void limparFormulario() {
+        txtNome.setText("");
+        txtCpf.setText("");
+        txtEmail.setText("");
+        txtTelefone.setText("");
+        txtEndereco.setText("");
+        jListTutores.clearSelection();
+        
+        // Limpa a ComboBox de animais
+        jComboBoxAnimais.setModel(new DefaultComboBoxModel<>());
+        
+        jButtonSalvar.setText("Cadastrar Novo");
+        txtNome.requestFocus();
+    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -29,20 +55,26 @@ public class CadastroTutor extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        TextNome = new javax.swing.JTextField();
-        TextCpf = new javax.swing.JTextField();
-        TextTelefone = new javax.swing.JTextField();
-        TextEndereco = new javax.swing.JTextField();
-        TextEmail = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jButtonSalvar = new javax.swing.JButton();
+        txtNome = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
+        txtTelefone = new javax.swing.JTextField();
+        txtEndereco = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        jComboBoxAnimais = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jListTutores = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonExcluir = new javax.swing.JButton();
+        jButtonAlterar = new javax.swing.JButton();
+        jButtonAtualizar = new javax.swing.JButton();
 
         jTextField5.setText("jTextField3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Liberation Sans", 0, 20)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(64, 91, 109));
@@ -68,22 +100,26 @@ public class CadastroTutor extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(64, 91, 109));
         jLabel7.setText("Animal:");
 
-        jButton1.setText("SALVAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSalvar.setText("SALVAR");
+        jButtonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonSalvarActionPerformed(evt);
             }
         });
 
-        TextNome.setText(" ");
+        txtNome.setText(" ");
 
-        TextTelefone.setText(" ");
+        txtTelefone.setText(" ");
 
-        TextEndereco.setText(" ");
+        txtEndereco.setText(" ");
 
-        TextEmail.setText(" ");
+        txtEmail.setText(" ");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxAnimais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAnimaisActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(54, 91, 109));
 
@@ -112,6 +148,31 @@ public class CadastroTutor extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(64, 91, 109));
         jLabel9.setText("SISTEMA DE GERENCIAMENTO DE CLINICAS");
 
+        jScrollPane1.setViewportView(jListTutores);
+
+        jLabel1.setText("LISTA DE TUTORES");
+
+        jButtonExcluir.setText("EXCLUIR");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
+
+        jButtonAlterar.setText("CONSULTAR/ALTERAR");
+        jButtonAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAlterarActionPerformed(evt);
+            }
+        });
+
+        jButtonAtualizar.setText("ATUALIZAR");
+        jButtonAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtualizarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,7 +185,9 @@ public class CadastroTutor extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(117, 117, 117)
                                 .addComponent(jLabel9))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(205, 205, 205)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,14 +199,23 @@ public class CadastroTutor extends javax.swing.JFrame {
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(TextEndereco, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(TextTelefone)
-                            .addComponent(TextEmail)
-                            .addComponent(TextCpf)
-                            .addComponent(jButton1)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                            .addComponent(txtEndereco, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtTelefone)
+                            .addComponent(txtEmail)
+                            .addComponent(txtCpf)
+                            .addComponent(jComboBoxAnimais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
+                                .addComponent(jButtonSalvar)))
+                        .addGap(239, 239, 239)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonExcluir)
+                            .addComponent(jButtonAlterar)
+                            .addComponent(jButtonAtualizar))))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,74 +223,172 @@ public class CadastroTutor extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel9)
                 .addGap(39, 39, 39)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(TextCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(TextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(TextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(TextEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(44, 44, 44))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBoxAnimais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonSalvar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jButtonExcluir)))
+                .addGap(27, 27, 27)
+                .addComponent(jButtonAlterar)
+                .addGap(31, 31, 31)
+                .addComponent(jButtonAtualizar)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
-        jComboBox1.getAccessibleContext().setAccessibleName("");
-        jComboBox1.getAccessibleContext().setAccessibleDescription("");
+        jComboBoxAnimais.getAccessibleContext().setAccessibleName("");
+        jComboBoxAnimais.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String nome = TextNome.getText().trim();
-        String cpf = TextCpf.getText().trim();
-        String email = TextEmail.getText().trim();
-        String telefone = TextTelefone.getText().trim();
-        String endereco = TextEndereco.getText().trim();
+    private void jButtonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSalvarActionPerformed
+       int selectedIndex = jListTutores.getSelectedIndex();
+        String nome = txtNome.getText().trim();
+        String cpf = txtCpf.getText().trim();
+        String email = txtEmail.getText().trim();
+        String telefone = txtTelefone.getText().trim();
+        String endereco = txtEndereco.getText().trim();
 
-       javax.swing.JOptionPane.showMessageDialog(this, "Tutor cadastrado");
-       
+        if (nome.isEmpty() || cpf.isEmpty()) { /* ... (mensagem de erro) ... */ return; }
 
-       Tutor novoTutor = new Tutor(nome, cpf, email, telefone, endereco);
-       
-       Sistema.listaTutores.add(novoTutor);
-       
-       TextNome.setText(" ");
-       TextCpf.setText(" ");
-       TextEmail.setText(" ");
-       TextTelefone.setText(" ");
-       TextEndereco.setText(" ");
-       
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (selectedIndex == -1) { // Modo Criação
+            Tutor novoTutor = new Tutor(nome, cpf, email, telefone, endereco);
+            this.clinica.getListaTutores().add(novoTutor);
+            JOptionPane.showMessageDialog(this, "Tutor cadastrado!");
+        } else { // Modo Alteração
+            Tutor tutorParaAlterar = jListTutores.getSelectedValue();
+            tutorParaAlterar.setNome(nome);
+            tutorParaAlterar.setCpf(cpf);
+            tutorParaAlterar.setEmail(email);
+            tutorParaAlterar.setTelefone(telefone);
+            tutorParaAlterar.setEndereco(endereco);
+            JOptionPane.showMessageDialog(this, "Dados do tutor alterados!");
+        }
+        
+        // CORREÇÃO DO BUG: Atualiza a lista e limpa o formulário
+        popularListaTutores();
+        limparFormulario();
+    }//GEN-LAST:event_jButtonSalvarActionPerformed
 
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        Tutor tutorSelecionado = jListTutores.getSelectedValue();
+        if (tutorSelecionado == null) {
+            JOptionPane.showMessageDialog(this, "Selecione um tutor para excluir.");
+            return;
+        }
+        
+        if (!tutorSelecionado.getAnimais().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Não é possível excluir um tutor que possui animais.", "Ação Bloqueada", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        int confirm = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir?");
+        if (confirm == JOptionPane.YES_OPTION) {
+            this.clinica.getListaTutores().remove(tutorSelecionado);
+            popularListaTutores();
+            limparFormulario();
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
-   
+    private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
+    // Pega o objeto Tutor que está selecionado na lista da direita
+    Tutor tutorSelecionado = jListTutores.getSelectedValue();
+
+    // Se ninguém estiver selecionado, avisa o usuário
+    if (tutorSelecionado == null) {
+        JOptionPane.showMessageDialog(this, "Por favor, selecione um tutor na lista.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // --- Parte que já funcionava ---
+    // Preenche os campos de texto com os dados do tutor
+    txtNome.setText(tutorSelecionado.getNome());
+    txtCpf.setText(tutorSelecionado.getCpf());
+    txtEmail.setText(tutorSelecionado.getEmail());
+    txtTelefone.setText(tutorSelecionado.getTelefone());
+    txtEndereco.setText(tutorSelecionado.getEndereco());
     
+    // Cria um novo modelo para a ComboBox de animais
+    DefaultComboBoxModel<Animal> modeloAnimais = new DefaultComboBoxModel<>();
+    
+    // Percorre a lista de animais DAQUELE TUTOR ESPECÍFICO
+    for (Animal animal : tutorSelecionado.getAnimais()) {
+        // 3. Adiciona cada animal do tutor na ComboBox
+        modeloAnimais.addElement(animal);
+    }
+    
+    // Define este novo modelo naComboBox
+    jComboBoxAnimais.setModel(modeloAnimais);
+    // ------------------------------------
+    
+    // Habilita a ComboBox para que o usuário possa vê-la
+    jComboBoxAnimais.setEnabled(true);
+    jLabel7.setEnabled(true); // Habilita o label "Animal:"
+    
+    // Muda o texto do botão Salvar para indicar que estamos no modo de edição
+    jButtonSalvar.setText("Salvar Alterações");
+    }//GEN-LAST:event_jButtonAlterarActionPerformed
+
+    private void jComboBoxAnimaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAnimaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxAnimaisActionPerformed
+
+    private void jButtonAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtualizarActionPerformed
+            
+    }//GEN-LAST:event_jButtonAtualizarActionPerformed
+
+//    public void popularComboBoxAnimais(){
+//        jComboBoxAnimais.removeAllItems();
+//        jComboBoxAnimais.addItem("Nenhum"); // Opção para não associar um animal
+//        // Usa a lista da clínica
+//        for (Animal animal : this.clinica.getListaAnimais()) {
+//            // Mostra apenas animais que ainda não têm um tutor
+//            if (animal.getTutor() == null) {
+//                jComboBoxAnimais.addItem(animal.getNome());
+//            }
+//        }
+//    }
+    
+
     public static void main(String args[]) {
       
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
         
-                new CadastroTutor().setVisible(true);
+//                new CadastroTutor().setVisible(true);
             }
         });
         
@@ -226,13 +396,12 @@ public class CadastroTutor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField TextCpf;
-    private javax.swing.JTextField TextEmail;
-    private javax.swing.JTextField TextEndereco;
-    private javax.swing.JTextField TextNome;
-    private javax.swing.JTextField TextTelefone;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton jButtonAlterar;
+    private javax.swing.JButton jButtonAtualizar;
+    private javax.swing.JButton jButtonExcluir;
+    private javax.swing.JButton jButtonSalvar;
+    private javax.swing.JComboBox<Animal> jComboBoxAnimais;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -241,7 +410,14 @@ public class CadastroTutor extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<Tutor> jListTutores;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEndereco;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }

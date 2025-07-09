@@ -19,7 +19,7 @@ public class Veterinario extends Funcionario{
         this.cfmv = cfmv;
     }
 
-    public Especialidade getEspecialiade(){
+    public Especialidade getEspecialidade(){
         return this.especialidade;
     }
 
@@ -35,7 +35,7 @@ public class Veterinario extends Funcionario{
                 "\nEndereco:"+getEndereco()+
                 "\nTelefone:"+getTelefone()+
                 "\nTurno:"+getTurno()+
-                "\nEspecialidade:"+getEspecialiade());
+                "\nEspecialidade:"+getEspecialidade());
     }
 
 }

@@ -1,35 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package ClinicaVeterinaria;
 
-/**
- *
- * @author Weliton
- */
+package ClinicaVeterinaria;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class VacinaOferecidas {
     
   private String nome;
   private float preco;
-  private int validade;
+  private LocalDate validade;
     
-    public VacinaOferecidas(String nome, float preco, int validade) {
+    public VacinaOferecidas(String nome, float preco, LocalDate validade) {
      this.nome = nome;
      this.preco = preco;
      this.validade = validade;
 }
-
-    /**
-     * @return the nome
-     */
+    
     public String getNome() {
         return nome;
     }
 
-    /**
-     * @param nome the nome to set
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -51,15 +40,26 @@ public class VacinaOferecidas {
     /**
      * @return the validade
      */
-    public int getValidade() {
+    public LocalDate getValidade() {
         return validade;
+    }
+    
+    public String getValidadeFormatada(LocalDate data) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return data.format(formatter);
     }
 
     /**
      * @param validade the validade to set
      */
-    public void setValidade(int validade) {
+    public void setValidade(LocalDate validade) {
         this.validade = validade;
     }
-   
+    
+    
+    @Override
+    public String toString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.nome + " (Val: " + this.validade.format(formatter) + ")";
+    }
 }

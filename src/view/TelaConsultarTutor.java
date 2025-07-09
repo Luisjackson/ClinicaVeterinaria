@@ -1,16 +1,20 @@
 package view;
 
-import ClinicaVeterinaria.Tutor;
 import ClinicaVeterinaria.Animal;
+import ClinicaVeterinaria.Clinica;
+import ClinicaVeterinaria.Tutor;
+
 import javax.swing.*;
 
 public class TelaConsultarTutor extends javax.swing.JPanel {
 
+    private Clinica clinica;
     private Tutor tutor;
     
-    public TelaConsultarTutor(Tutor tutor) {
+    public TelaConsultarTutor(Tutor tutor, Clinica clinica) {
         initComponents();
          
+        this.clinica = clinica;
         this.tutor = tutor;
          
         // Atualiza a jList1 criada no NetBeans
@@ -19,7 +23,7 @@ public class TelaConsultarTutor extends javax.swing.JPanel {
             modelo.addElement(animal.getNome());
         }
 
-        jList1.setModel(modelo); // usa a jList1 do NetBeans
+        jList1.setModel(modelo);
 
         // Preenche os campos do tutor
         jTextField1.setText(tutor.getNome());
@@ -101,7 +105,7 @@ public class TelaConsultarTutor extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(64, 91, 109));
         jLabel1.setText("Animal:");
 
-        jButton2.setText("Excluir Animal");
+        jButton2.setText("Excluir Animal Selecionado");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -214,16 +218,13 @@ public class TelaConsultarTutor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                // COLE ESTE CÓDIGO DENTRO DO MÉTODO jButton2ActionPerformed
-        //--- INÍCIO DA LÓGICA DO BOTÃO EXCLUIR ---
-
         // Pega o índice do item selecionado na lista
         int selectedIndex = jList1.getSelectedIndex();
 
         // Verifica se um animal foi realmente selecionado
         if (selectedIndex == -1) {
             JOptionPane.showMessageDialog(this, "Por favor, selecione um animal para excluir.", "Nenhum animal selecionado", JOptionPane.WARNING_MESSAGE);
-            return; // Encerra a execução do método
+            return; 
         }
 
         // Pede confirmação antes de excluir
@@ -257,7 +258,7 @@ public class TelaConsultarTutor extends javax.swing.JPanel {
                 this.tutor.removerAnimal(animalParaExcluir);
 
                 // Remove da lista geral do sistema
-                ClinicaVeterinaria.Sistema.listaAnimais.remove(animalParaExcluir);
+                this.clinica.getListaAnimais().remove(animalParaExcluir);
 
                 // Remove da lista visual (JList)
                 DefaultListModel<String> model = (DefaultListModel<String>) jList1.getModel();
@@ -269,7 +270,6 @@ public class TelaConsultarTutor extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Ocorreu um erro ao excluir o animal.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
 
-        //--- FIM DA LÓGICA DO BOTÃO EXCLUIR ---
     }//GEN-LAST:event_jButton2ActionPerformed
 
     

@@ -26,11 +26,10 @@ public class Especialidade {
         this.preco = preco;
     }
 
+    
+    
     @Override
     public String toString() {
-        return "Especialidade{" +
-                "nome='" + nome + '\'' +
-                ", preco=" + preco +
-                '}';
+        return this.nome;
     }
 }

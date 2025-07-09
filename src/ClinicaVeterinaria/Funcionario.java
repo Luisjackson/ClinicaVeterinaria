@@ -19,14 +19,7 @@ public class Funcionario extends Pessoa{
 
     @Override
     public String toString() {
-        return "Funcionario{" +
-                "nome='" + getNome() + '\'' +
-                ", cpf='" + getCpf() + '\'' +
-                ", email='" + getEmail() + '\'' +
-                ", telefone='" + getTelefone() + '\'' +
-                ", endereco='" + getEndereco() + '\'' +
-                ", turno='" + turno + '\'' +
-                '}';
+        return this.getNome();
     }
 
 }
