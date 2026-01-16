@@ -59,9 +59,7 @@ public class Clinica {
            Especialidade especialidade = agendamento.getEspecialidade();
            Veterinario veterinario = null;
 
-           // CORREÇÃO: O loop agora procura na lista correta (this.listaVeterinarios)
            for (Veterinario v : this.listaVeterinarios) {
-               // Usa a comparação de objetos, que é mais segura
                if (v.getEspecialidade().equals(especialidade)) {
                    veterinario = v;
                    break;
@@ -73,7 +71,6 @@ public class Clinica {
                return null;
            }
 
-           // O resto do seu código já está correto
            LocalDate data = agendamento.getAgenda().getData();
            Consulta consulta = new Consulta(medicamentos, diagnostico, data, motivo, animal, veterinario);
 
@@ -88,9 +85,7 @@ public class Clinica {
     public Consulta realizarConsultaDireta(Animal animal, Especialidade especialidade, String motivo, String diagnostico, String medicamentos) {
         Veterinario veterinario = null;
 
-        // CORREÇÃO: O loop agora procura na lista correta (this.listaVeterinarios)
         for (Veterinario v : this.listaVeterinarios) {
-            // Usa a comparação de objetos, que é mais segura
             if (v.getEspecialidade().equals(especialidade)) {
                 veterinario = v;
                 break;
@@ -102,7 +97,6 @@ public class Clinica {
             return null;
         }
 
-        // O resto do seu código já está correto
         LocalDate data = LocalDate.now();
         Consulta consulta = new Consulta(medicamentos, diagnostico, data, motivo, animal, veterinario);
 
